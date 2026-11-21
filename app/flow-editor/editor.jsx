@@ -1,5 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
 import {
   addConnection,
   compileGraph,
@@ -8,18 +9,18 @@ import {
   makeNode,
   outputPort,
   readView,
-} from '../src/research/graph.mjs';
-import { nodeTypes } from '../src/research/nodes.mjs';
-import { blankView, branchTemplate, researchTemplate } from '../src/research/templates.mjs';
-import { Board, ConnectionPreview, LabDiagram, NODE_HEIGHT, NODE_WIDTH } from './diagram.jsx';
+} from '../../src/research/graph.mjs';
+import { nodeTypes } from '../../src/research/nodes.mjs';
+import { blankView, branchTemplate, researchTemplate } from '../../src/research/templates.mjs';
+import { Board, ConnectionPreview, FlowDiagram, initialCamera, NODE_HEIGHT, NODE_WIDTH } from './diagram.jsx';
 import { EditText, Inspector, NodeMenu } from './panels.jsx';
 
-const storageKey = 'rsi.competition.blueprint.v2';
+const storageKey = 'competition-flow.blueprint.v2';
 const historyLimit = 40;
 const clone = (graph) => structuredClone(graph);
 function loadDraft() {
   try {
-    const saved = localStorage.getItem(storageKey);
+    const saved = localStorage.getItem(storageKey) ?? localStorage.getItem('rsi.competition.blueprint.v2');
     return { view: saved ? readView(JSON.parse(saved)) : researchTemplate(), note: '' };
   } catch {
     return { view: researchTemplate(), note: '未能读取浏览器草稿，已打开实时调研模板。' };
@@ -28,16 +29,15 @@ function loadDraft() {
 const newId = (kind) => kind + '-' + crypto.randomUUID();
 const templates = { blank: blankView, research: researchTemplate, branch: branchTemplate };
 
-function Editor() {
+export default function Editor() {
   const [initial] = useState(loadDraft);
   const [view, setView] = useState(initial.view),
     current = useRef(view);
   const [note, setNote] = useState(initial.note);
-  const api = useRef(null),
-    diagram = useRef(null),
+  const diagram = useRef(null),
     uploader = useRef(null);
   const history = useRef({ past: [], future: [] });
-  const [camera, setCamera] = useState(0);
+  const [camera, setCamera] = useState(initialCamera);
   const [selection, select] = useState(null);
   const [menu, setMenu] = useState(null);
   const [preview, setPreview] = useState(null),
@@ -45,8 +45,7 @@ function Editor() {
   const [busy, setBusy] = useState(false),
     busyRef = useRef(false);
   const [runs, setRuns] = useState({});
-  const dragNode = useRef(null),
-    handlers = useRef(null);
+  const handlers = useRef(null);
   const node = view.elements.find((n) => n.id === selection?.node);
   const edge = view.links.find((e) => e.id === selection?.edge);
 
@@ -69,9 +68,8 @@ function Editor() {
     pending.current = null;
     setPreview(null);
   }
-  function put(doc, paint = true) {
+  function put(doc) {
     current.current = doc;
-    if (paint) api.current?.setView(clone(doc));
     setView(doc);
     try {
       localStorage.setItem(storageKey, JSON.stringify(doc));
@@ -80,7 +78,7 @@ function Editor() {
     }
     postStats();
   }
-  function commit(raw, message, { paint = true, keepTrace = false } = {}) {
+  function commit(raw, message, { keepTrace = false } = {}) {
     if (busyRef.current) return false;
     try {
       const next = readView(raw);
@@ -90,30 +88,20 @@ function Editor() {
       log.future = [];
       if (!keepTrace) setRuns({});
       setNote(message || '');
-      put(next, paint);
+      put(next);
       return true;
     } catch (err) {
       setNote(err.message);
       return false;
     }
   }
-  function rememberMove() {
-    const id = dragNode.current;
-    dragNode.current = null;
-    if (!id || busyRef.current) return;
-    const doc = current.current,
-      old = doc.elements.find((n) => n.id === id);
-    const moved = api.current?.getView().elements.find((n) => n.id === id);
-    if (old && moved && (old.x !== Math.round(moved.x) || old.y !== Math.round(moved.y))) {
-      const elements = doc.elements.map((n) =>
-        n.id === id ? { ...n, x: moved.x, y: moved.y } : n,
-      );
-      commit({ ...doc, elements }, '', { paint: false, keepTrace: true });
-    }
+  function moveNode(id, x, y) {
+    const doc = current.current;
+    const elements = doc.elements.map((item) => item.id === id ? { ...item, x, y } : item);
+    commit({ ...doc, elements }, '', { keepTrace: true });
   }
   function travel(back) {
     if (busyRef.current) return;
-    rememberMove();
     const log = history.current,
       from = back ? log.past : log.future,
       to = back ? log.future : log.past;
@@ -131,7 +119,7 @@ function Editor() {
     setMenu(null);
     select(null);
     cancelWire();
-    setCamera((n) => n + 1);
+    setCamera(initialCamera);
   }
   function inspectNode(id, move = false) {
     setMenu(null);
@@ -171,7 +159,7 @@ function Editor() {
       if (commit({ ...doc, elements }, '已按依赖层排列节点。', { keepTrace: true })) {
         select(null);
         cancelWire();
-        setCamera((n) => n + 1);
+        setCamera(initialCamera);
       }
     } catch (err) {
       setNote(err.message);
@@ -179,12 +167,9 @@ function Editor() {
   }
   function atWorld(x, y) {
     const area = diagram.current.getBoundingClientRect();
-    const svg = diagram.current.querySelector('svg[width="100%"]');
-    const scale = svg?.getScreenCTM()?.a || 1;
-    const offset = api.current.getOffset();
     return {
-      x: Math.round((x - area.left) / scale + offset.x),
-      y: Math.round((y - area.top) / scale + offset.y),
+      x: Math.round((x - area.left - camera.x) / camera.scale),
+      y: Math.round((y - area.top - camera.y) / camera.scale),
     };
   }
   function openMenu(x, y, options = {}) {
@@ -305,9 +290,8 @@ function Editor() {
     }
   }
   function endGesture(e) {
-    if (dragNode.current) requestAnimationFrame(rememberMove);
     const from = pending.current;
-    if (!from || e.button !== 0) return;
+    if (!from || !e.isPrimary || e.button !== 0) return;
     const target = document.elementFromPoint(e.clientX, e.clientY);
     const pin = target?.closest('[data-pin-side]');
     if (pin?.dataset.pinSide === 'in') {
@@ -322,7 +306,6 @@ function Editor() {
     openMenu(e.clientX, e.clientY, { from, fromType: from.type });
   }
   function exportFile() {
-    rememberMove();
     const doc = current.current;
     const url = URL.createObjectURL(
       new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' }),
@@ -388,7 +371,6 @@ function Editor() {
   handlers.current = {
     hostMessage,
     endGesture,
-    rememberMove,
     postStats,
     key(e) {
       if (e.key === 'Escape') {
@@ -412,33 +394,25 @@ function Editor() {
       }
     },
   };
-  useLayoutEffect(() => {
-    api.current.setView(clone(current.current));
-    api.current.selectToolbarItems(['zoomIn', 'zoomOut']);
-  }, [camera]);
   useEffect(() => {
-    window.getCompetitionView = () => {
-      handlers.current.rememberMove();
-      return clone(current.current);
-    };
+    window.getCompetitionView = () => clone(current.current);
     const message = (e) => handlers.current.hostMessage(e);
     const up = (e) => handlers.current.endGesture(e);
     const key = (e) => handlers.current.key(e);
-    const blur = () => {
-      handlers.current.rememberMove();
-      cancelWire();
-    };
+    const blur = cancelWire;
     window.addEventListener('message', message);
-    window.addEventListener('mouseup', up, true);
+    window.addEventListener('pointerup', up, true);
     window.addEventListener('keydown', key);
     window.addEventListener('blur', blur);
+    window.addEventListener('pointercancel', blur);
     handlers.current.postStats();
     return () => {
       delete window.getCompetitionView;
       window.removeEventListener('message', message);
-      window.removeEventListener('mouseup', up, true);
+      window.removeEventListener('pointerup', up, true);
       window.removeEventListener('keydown', key);
       window.removeEventListener('blur', blur);
+      window.removeEventListener('pointercancel', blur);
     };
   }, []);
   const board = {
@@ -448,10 +422,7 @@ function Editor() {
     pendingType: preview?.type,
     begin,
     finish,
-    selectNode(id) {
-      inspectNode(id);
-      if (!busyRef.current) dragNode.current = id;
-    },
+    selectNode: inspectNode,
     selectWire(id) {
       setMenu(null);
       cancelWire();
@@ -460,8 +431,8 @@ function Editor() {
   };
   return (
     <div
-      className="editor"
-      onMouseDownCapture={(e) => {
+      className="editor flow-appearance"
+      onPointerDownCapture={(e) => {
         if (menu && !e.target.closest('.picker')) setMenu(null);
         if (pending.current && !e.target.closest('[data-pin-side],.diagram')) cancelWire();
       }}
@@ -521,7 +492,7 @@ function Editor() {
           <button
             onClick={() => {
               select((item) => (item?.reveal ? { node: item.node } : item));
-              setCamera((n) => n + 1);
+              setCamera(initialCamera);
             }}
             title="恢复初始缩放和视口"
           >
@@ -546,8 +517,8 @@ function Editor() {
         <div
           className="diagram"
           ref={diagram}
-          onMouseDownCapture={(e) => {
-            if (e.button === 0 && !e.target.closest('[data-node],[data-wire],#zoomIn,#zoomOut'))
+          onPointerDownCapture={(e) => {
+            if (e.button === 0 && !e.target.closest('[data-node],[data-wire],.zoom-controls'))
               select(null);
           }}
           onContextMenu={(e) => {
@@ -556,11 +527,13 @@ function Editor() {
           }}
         >
           <Board.Provider value={board}>
-            <LabDiagram
-              key={camera}
+            <FlowDiagram
+              view={view}
               viewport={diagram}
+              camera={camera}
+              changeCamera={setCamera}
+              moveNode={moveNode}
               reveal={selection?.reveal ? selection : null}
-              ref={api}
             />
           </Board.Provider>
         </div>
@@ -615,4 +588,3 @@ function Editor() {
     </div>
   );
 }
-ReactDOM.render(<Editor />, document.getElementById('root'));

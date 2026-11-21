@@ -161,7 +161,7 @@ export default function Research() {
   function show(result, kind) {
     setReport(result);
     setMode(kind);
-    setTrace(result.trace);
+    setTrace(result.trace ?? []);
     setFilter('全部');
     setGroupId('');
     setActive('');
@@ -244,19 +244,19 @@ export default function Research() {
       setBusy(false);
     }
   }
-  async function replay() {
+  async function openSnapshot() {
     if (activeRequest.current) return;
     const controller = new AbortController();
     activeRequest.current = controller;
     setLoadingArchive(true);
     setError('');
     try {
-      const res = await fetch('/evidence/first-run.json', {
+      const res = await fetch('/data/competition-snapshot.json', {
         cache: 'no-store',
         signal: controller.signal,
       });
-      if (!res.ok) throw Error('尚无已保存的实跑记录。');
-      show(await res.json(), '已保存的实跑记录');
+      if (!res.ok) throw Error('未能读取赛事快照。');
+      show(await res.json(), '赛事快照');
       toCanvas({ type: 'clear' });
     } catch (e) {
       setError(e.message);
@@ -271,7 +271,7 @@ export default function Research() {
     );
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'competition-' + report.runId + '.json';
+    a.download = report.runId ? 'competition-' + report.runId + '.json' : 'competition-snapshot.json';
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -289,13 +289,13 @@ export default function Research() {
     <main className="research">
       <header className="mast">
         <a href="/competitions">
-          RSI Flow <span>/ 智能体编排实验室</span>
+          参赛机会 <span>/ 我的工作台</span>
         </a>
         <a href="#results">调研结果 ↓</a>
       </header>
       <div className="intro">
         <div>
-          <h1>实验室参赛调研台</h1>
+          <h1>参赛调研台</h1>
           <p>从主办方公告中筛选未来一年的参赛机会，核对资格、交件时间和作品要求。</p>
         </div>
         <div className="timeZone">所有时刻均为北京时间</div>
@@ -318,8 +318,8 @@ export default function Research() {
           <iframe
             ref={frame}
             onLoad={queryCanvas}
-            title="可编辑的实验室 RSI Flow 画布"
-            src="/flow-editor/index.html"
+            title="赛事调研流程画布"
+            src="/flow-editor"
           />
         </div>
         <aside className="controls">
@@ -329,7 +329,7 @@ export default function Research() {
               {topology?.liveSources
                 ? '实时采集范围为未来 12 个月'
                 : topology?.useSnapshot
-                  ? '赛事状态取自已保存的实跑'
+                  ? '赛事状态取自采集当天的快照'
                   : '选择要处理的赛事方向'}
             </p>
           </div>
@@ -364,8 +364,8 @@ export default function Research() {
                 停止本次运行
               </button>
             ) : (
-              <button className="secondary" onClick={replay} disabled={loadingArchive}>
-                {loadingArchive ? '正在读取…' : '查看已保存实跑'}
+              <button className="secondary" onClick={openSnapshot} disabled={loadingArchive}>
+                {loadingArchive ? '正在读取…' : '查看赛事快照'}
               </button>
             )}
           </div>
@@ -419,26 +419,25 @@ export default function Research() {
           <h2>赛事清单{report ? ' · ' + report.rows.length : ''}</h2>
           {report && (
             <button className="textButton" onClick={download}>
-              下载本次记录 ↓
+              {report.runId ? '下载本次记录' : '下载快照'} ↓
             </button>
           )}
         </div>
         {!report && (
-          <p className="empty">运行调研或打开一份已保存的记录，即可查看赛事和原文依据。</p>
+          <p className="empty">运行调研或打开赛事快照，查看各场比赛与主办方原文。</p>
         )}
         {report && (
           <>
             <div className="runMeta">
-              <b>{mode}</b>　{time(report.input.startedAt)}
-              {(!report.mode || report.mode !== 'snapshot') &&
+              <b>{mode}</b>　{time(report.input?.startedAt ?? report.asOf)}
+              {report.input && report.mode !== 'snapshot' &&
                 ' · 调研至 ' + dateOnly(report.input.windowEndsAt)}
               {report.provenance?.snapshot &&
-                ' · 历史采集于 ' + time(report.provenance.snapshot.asOf)}
+                ' · 快照采集于 ' + time(report.provenance.snapshot.asOf)}
               {report.model?.provider && ' · ' + report.model.provider}
               {report.model?.model && ' · ' + report.model.model}
-              {report.modelCalls &&
-                ' · 模型调用 ' + report.modelCalls.length + ' 次'}　·　运行编号{' '}
-              <code>{report.runId.slice(0, 8)}</code>
+              {report.modelCalls && ' · 模型调用 ' + report.modelCalls.length + ' 次'}
+              {report.runId && <>　·　运行编号 <code>{report.runId.slice(0, 8)}</code></>}
             </div>
             {report.groups?.length > 0 && (
               <label className="groupPicker">

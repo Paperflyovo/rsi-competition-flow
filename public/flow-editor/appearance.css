@@ -1,5 +1,5 @@
 /* Both the host and its same-origin editor load this palette. */
-:where(.flow-appearance, .research, body:has(.research)) {
+:where(.flow-appearance, html:has(.flow-appearance), .research, body:has(.research)) {
   color-scheme: light dark;
   --flow-font:
     -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei',
@@ -33,7 +33,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :where(.flow-appearance, .research, body:has(.research)) {
+  :where(.flow-appearance, html:has(.flow-appearance), .research, body:has(.research)) {
     --flow-page: #16171b;
     --flow-board: #20232b;
     --flow-dot: #3e4452;
@@ -64,7 +64,7 @@
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  :where(.flow-appearance, .research, body:has(.research)) {
+  :where(.flow-appearance, html:has(.flow-appearance), .research, body:has(.research)) {
     --flow-material: var(--flow-surface);
   }
 }

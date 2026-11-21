@@ -6,7 +6,7 @@ import {
   portTypes,
   sortModes,
   valuesFor,
-} from '../src/research/nodes.mjs';
+} from '../../src/research/nodes.mjs';
 import { NodeMark, portColor, stateText } from './diagram.jsx';
 
 export function EditText({ value, save, label, maxLength = 64 }) {
@@ -189,7 +189,7 @@ export function Inspector({
             {node.kind === 'merge' && (
               <p>相同赛事保留输入 A 的版本。两端需接线，执行时可接收单侧活跃分支。</p>
             )}
-            {node.kind === 'snapshot' && <p>读取随项目保存的实跑记录，保留当时的赛事状态。</p>}
+            {node.kind === 'snapshot' && <p>读取公开赛事快照，使用采集当天的赛事状态。</p>}
             {node.kind === 'extract' && <p>读取上游公告，使用「运行设置 → 模型服务」选定的模型。</p>}
             <div className="panel-actions">
               {!['start', 'end'].includes(node.kind) && (

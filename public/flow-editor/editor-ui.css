@@ -3,7 +3,6 @@
 }
 html,
 body,
-#root,
 .editor {
   width: 100%;
   height: 100%;
@@ -154,53 +153,53 @@ fieldset {
   min-height: 0;
   background: var(--flow-board);
 }
-.diagram,
-.diagram > div {
+.diagram, .canvas-viewport {
   width: 100%;
   height: 100%;
-  min-height: 0 !important;
+  min-height: 0;
   overflow: hidden;
-  background: var(--flow-board);
 }
-.diagram div[style*='scale('] {
-  background-color: var(--flow-board);
-  background-image: radial-gradient(circle, var(--flow-dot) 0.85px, transparent 1.1px);
-  background-size: 20px 20px;
+.canvas-viewport {
+  position: relative;
+  background: var(--flow-board) radial-gradient(circle, var(--flow-dot) 0.85px, transparent 1.1px);
+  touch-action: none;
+  user-select: none;
 }
-.diagram div:has(> #zoomIn) {
-  inset: auto auto 12px 12px;
-  margin: 0;
-  padding: 3px;
-  width: 78px;
-  height: 36px;
+.canvas-world, .canvas-wires, .canvas-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.canvas-world {
+  width: 1px;
+  height: 1px;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.canvas-card {
+  pointer-events: auto;
+}
+.canvas-wires {
+  pointer-events: none;
+}
+.zoom-controls {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 1px;
+  gap: 2px;
+  padding: 3px;
   border: 1px solid var(--flow-separator);
   border-radius: 20px;
   background: var(--flow-material);
   box-shadow: var(--flow-shadow);
 }
-.diagram #zoomIn,
-.diagram #zoomOut {
-  display: grid;
-  place-items: center;
+.zoom-controls button {
+  min-width: 32px;
   min-height: 28px;
-  height: 28px;
+  padding: 2px;
   border-radius: 16px;
-  color: var(--flow-text);
   font: 500 19px/1 var(--flow-font);
-}
-.diagram #zoomIn svg,
-.diagram #zoomOut svg {
-  display: none;
-}
-.diagram #zoomIn::after {
-  content: '+';
-}
-.diagram #zoomOut::after {
-  content: '−';
 }
 
 /* The renderer measures positions to the card edge. An inset outline leaves pins on that edge. */
@@ -733,7 +732,7 @@ footer [role='status'] {
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .inspector,
   .picker,
-  .diagram div:has(> #zoomIn) {
+  .zoom-controls {
     -webkit-backdrop-filter: saturate(135%) blur(16px);
     backdrop-filter: saturate(135%) blur(16px);
   }
@@ -743,8 +742,7 @@ footer [role='status'] {
   .icon:hover:enabled,
   .panel-actions button:hover:enabled,
   .choices button:hover:enabled,
-  .diagram #zoomIn:hover,
-  .diagram #zoomOut:hover {
+  .zoom-controls button:hover {
     background: var(--flow-hover);
   }
   .bar .add:hover:enabled,
@@ -780,16 +778,15 @@ footer [role='status'] {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .diagram div:has(> #zoomIn),
-  .diagram #zoomIn,
-  .diagram #zoomOut {
+  .zoom-controls,
+  .zoom-controls button {
     transition: none;
   }
 }
 @media (prefers-reduced-transparency: reduce) {
   .inspector,
   .picker,
-  .diagram div:has(> #zoomIn) {
+  .zoom-controls {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { modelProviders, providerBaseUrl } from '../../src/research/providers.mjs';
 
-const preferenceKey = 'rsi.competition.model-provider.v1';
+const preferenceKey = 'competition-flow.model-provider.v1';
 
 function newSelection(kind) {
   const { baseUrl, model } = modelProviders[kind];

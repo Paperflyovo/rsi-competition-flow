@@ -50,7 +50,7 @@ export const nodeTypes = {
     outputs: output('rows'),
   },
   snapshot: {
-    title: '读取历史实跑',
+    title: '读取赛事快照',
     group: '输入',
     inputs: input('scope'),
     outputs: output('rows'),

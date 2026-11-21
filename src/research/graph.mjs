@@ -84,7 +84,7 @@ function checkEdge(nodes, edge) {
   return into;
 }
 
-// Normalize imported drafts before passing them to the vendor component, which assumes valid node references.
+// Validate node identities, ports and positions before rendering or executing an imported graph.
 export function readView(raw) {
   if (
     (raw?.schemaVersion !== undefined && raw.schemaVersion !== 2) ||
@@ -147,7 +147,7 @@ export function readView(raw) {
   if (typeof title !== 'string' || title.length > 80) throw Error('流程名称须在 80 个字符以内。');
   return {
     schemaVersion: 2,
-    id: 'lab-competition',
+    id: 'competition-flow',
     title: title.trim() || '未命名流程',
     elements: [...nodes.values()],
     links,

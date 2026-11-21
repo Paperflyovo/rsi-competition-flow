@@ -1,7 +1,7 @@
 import { makeLink, makeNode } from './graph.mjs';
 
 export function blankView() {
-  return { schemaVersion: 2, id: 'lab-competition', title: '未命名流程', elements: [], links: [] };
+  return { schemaVersion: 2, id: 'competition-flow', title: '未命名流程', elements: [], links: [] };
 }
 
 export function researchTemplate() {

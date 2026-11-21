@@ -1,30 +1,5 @@
 {
-  "runId": "64fea315-c84e-4d79-9eea-f52e1734eb74",
-  "mode": "live",
-  "input": {
-    "audience": "中国高校智能体编排实验室",
-    "directions": [
-      "智能体",
-      "AI 应用",
-      "游戏开发"
-    ],
-    "startedAt": "2026-11-20T16:36:58.932Z",
-    "windowEndsAt": "2027-11-20T16:36:58.932Z"
-  },
-  "order": [
-    "discover",
-    "fetch",
-    "extract",
-    "audit",
-    "rank",
-    "publish"
-  ],
-  "model": {
-    "model": "deepseek-flash",
-    "requestId": "7a53705a-00dd-48a9-a830-adcc603f0b62",
-    "inputTokens": 7994,
-    "outputTokens": 1355
-  },
+  "asOf": "2026-11-20T16:37:09.673Z",
   "rows": [
     {
       "id": "qoder",
@@ -66,9 +41,7 @@
       "deliverable": {
         "summary": "用 Qoder 完成开发与部署的项目，部署到 Qoder Sites 并开放公开访问，另在天池赛题页论坛发布作品帖并附公网链接。",
         "quote": "用 Qoder 开发一个完整的项目，部署到 Qoder Sites 并开放公开访问"
-      },
-      "idea": "围绕实验室文献整理与实验数据场景做一个可公开访问的科研 Copilot，并完整记录 Qoder 开发部署过程。",
-      "issue": null
+      }
     },
     {
       "id": "gameoff",
@@ -97,9 +70,7 @@
       "deliverable": {
         "summary": "以 SHIFT 为灵感的游戏：源码放在公开 GitHub 仓库，并在 itch.io 提交参赛，项目应在活动期内开始、主要工作于提交期内完成。",
         "quote": "Create a public repository. Store your game’s source code on GitHub."
-      },
-      "idea": "做一个以“切换视角”为核心机制的浏览器 2D 小游戏，先完成单一机制与一个可玩关卡。",
-      "issue": null
+      }
     },
     {
       "id": "relate",
@@ -135,9 +106,7 @@
       "deliverable": {
         "summary": "使用 Relate 新建的项目，公开 GitHub 仓库且打上 relate 标签，提供可让评委安装运行的说明，以及不超过2分钟的视频或可运行 demo 链接和截图。",
         "quote": "The project must be posted as a public GitHub repository, tagged with the GitHub topic relate"
-      },
-      "idea": "基于 Relate 图数据库为 AI 智能体做一个可运行的知识关系检索原型，公开仓库并附安装说明与短演示。",
-      "issue": null
+      }
     },
     {
       "id": "agentweb",
@@ -173,9 +142,7 @@
       "deliverable": {
         "summary": "可公开访问、能在当前浏览器稳定运行的项目，提交时提供网站、可运行 demo 或测试版本链接，以及上传至 YouTube 并公开的视频链接。",
         "quote": "The Project must be publicly accessible, run consistently in a current web browser"
-      },
-      "idea": "开发一个可公开测试的开放代理发现与身份互认原型，附浏览器可运行 demo 和英文演示视频。",
-      "issue": null
+      }
     },
     {
       "id": "agentware",
@@ -207,9 +174,7 @@
       "deliverable": {
         "summary": "可自主完成真实工作的 AI 智能体，评委能运行、能观看其从触发到完成任务的演示视频、并能读懂其执行记录。",
         "quote": "Build an AI agent that does real work on its own."
-      },
-      "idea": "为实验室做一个可无人值守运行的文献与截止日期跟踪智能体，演示从触发到完成任务的完整过程。",
-      "issue": null
+      }
     },
     {
       "id": "4c",
@@ -229,9 +194,7 @@
       "deliverable": {
         "summary": "2027年（第20届）数字媒体类、计算机音乐创作类、信息可视化设计类作品，主题为中国农耕时间指南二十四节气，涵盖节气文明成就、领域先贤名人、古代著作与文化传播等方向。",
         "quote": "数字媒体类、计算机音乐创作类、信息可视化设计类的竞赛主题为：中国农耕时间指南二十四节气"
-      },
-      "idea": "用信息可视化或数字媒体形式呈现二十四节气中的农事节律与相关农书民俗，突出节气文化传播。",
-      "issue": null
+      }
     },
     {
       "id": "dubai",
@@ -267,9 +230,7 @@
       "deliverable": {
         "summary": "处于创意、原型或早期 MVP 阶段且尚未完全商业化的 AI 智能体，提交 AI Agent 原型、路演材料和演示视频，材料须为英文。",
         "quote": "The AI Agent submitted must be at the idea, prototype or early MVP stage and must not already be a fully commercialized solution"
-      },
-      "idea": "面向校园或社区真实问题做一个英文路演材料齐全的 AI 智能体早期原型，突出可量化社会影响。",
-      "issue": null
+      }
     },
     {
       "id": "tencent",
@@ -310,97 +271,7 @@
       "deliverable": {
         "summary": "具备一定完成度、能以 demo 展示核心玩法循环且玩法容量15分钟以上的原创游戏，报名时需提交试玩 demo 包体、宣传视频、宣传图片和介绍文案等评审材料。",
         "quote": "所有参赛者在报名时需提供完整的评审材料，如试玩demo包体、宣传视频、宣传图片、介绍文案等"
-      },
-      "idea": "以玩法创新为核心做一款15分钟以上可试玩 demo 的小体量原创游戏，并配齐宣传视频与图片材料。",
-      "issue": null
+      }
     }
-  ],
-  "engine": "@horsecoder/flow 1.0.3",
-  "trace": [
-    {
-      "id": "discover",
-      "title": "选择赛事入口",
-      "startedAt": "2026-11-20T16:36:58.933Z",
-      "detail": "在 8 个主办方入口中匹配 8 个。",
-      "elapsedMs": 0
-    },
-    {
-      "id": "fetch",
-      "title": "取主办方原文",
-      "startedAt": "2026-11-20T16:36:58.933Z",
-      "detail": "读到 8 份公告，0 个来源异常。",
-      "elapsedMs": 3358
-    },
-    {
-      "id": "extract",
-      "title": "提取参赛条件",
-      "startedAt": "2026-11-20T16:37:02.291Z",
-      "detail": "deepseek-flash 返回 8 条记录。",
-      "elapsedMs": 7381
-    },
-    {
-      "id": "audit",
-      "title": "核对证据与日期",
-      "startedAt": "2026-11-20T16:37:09.673Z",
-      "detail": "8 项交付物有原文摘录；另有 0 项摘录需复查。",
-      "elapsedMs": 0
-    },
-    {
-      "id": "rank",
-      "title": "排列优先级",
-      "startedAt": "2026-11-20T16:37:09.673Z",
-      "detail": "按可行动状态、同组最近截止日排序。",
-      "elapsedMs": 0
-    },
-    {
-      "id": "publish",
-      "title": "生成参赛清单",
-      "startedAt": "2026-11-20T16:37:09.673Z",
-      "detail": "输出 8 条带来源的赛事记录。",
-      "elapsedMs": 0
-    }
-  ],
-  "graph": {
-    "nodes": [
-      "start",
-      "discover",
-      "fetch",
-      "extract",
-      "audit",
-      "publish",
-      "end",
-      "rank"
-    ],
-    "routes": [
-      [
-        "start",
-        "discover"
-      ],
-      [
-        "discover",
-        "fetch"
-      ],
-      [
-        "extract",
-        "audit"
-      ],
-      [
-        "publish",
-        "end"
-      ],
-      [
-        "audit",
-        "rank"
-      ],
-      [
-        "rank",
-        "publish"
-      ],
-      [
-        "fetch",
-        "extract"
-      ]
-    ]
-  },
-  "finishedAt": "2026-11-20T16:37:09.673Z"
+  ]
 }

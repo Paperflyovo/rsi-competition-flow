@@ -108,7 +108,7 @@ export function researchOperations(scope, signal, provider) {
     extracted = new Map(),
     modelCalls = [];
   const provenance = { live: false, snapshot: null };
-  let savedReport;
+  let savedSnapshot;
   let groups = [];
 
   const actions = {
@@ -178,15 +178,15 @@ export function researchOperations(scope, signal, provider) {
       );
     },
     async snapshot(node, { in: range }) {
-      if (!savedReport) {
-        const file = path.join(process.cwd(), 'public', 'evidence', 'first-run.json');
-        savedReport = JSON.parse(await readFile(file, 'utf8'));
+      if (!savedSnapshot) {
+        const file = path.join(process.cwd(), 'public', 'data', 'competition-snapshot.json');
+        savedSnapshot = JSON.parse(await readFile(file, 'utf8'));
       }
-      provenance.snapshot = { runId: savedReport.runId, asOf: savedReport.input.startedAt };
-      const rows = savedReport.rows.filter((row) =>
+      provenance.snapshot = { asOf: savedSnapshot.asOf };
+      const rows = savedSnapshot.rows.filter((row) =>
         row.tags.some((tag) => range.directions.includes(tag)),
       );
-      return result(rows, '读取历史实跑中的 ' + rows.length + ' 项，沿用采集时的日期和状态。');
+      return result(rows, '读取赛事快照中的 ' + rows.length + ' 项，沿用采集时的日期和状态。');
     },
     filter(node, { in: rows }) {
       const selected = rows.filter((row) => matchesRow(row, node.settings));
