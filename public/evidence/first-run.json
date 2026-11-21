@@ -1,0 +1,406 @@
+{
+  "runId": "64fea315-c84e-4d79-9eea-f52e1734eb74",
+  "mode": "live",
+  "input": {
+    "audience": "中国高校智能体编排实验室",
+    "directions": [
+      "智能体",
+      "AI 应用",
+      "游戏开发"
+    ],
+    "startedAt": "2026-11-20T16:36:58.932Z",
+    "windowEndsAt": "2027-11-20T16:36:58.932Z"
+  },
+  "order": [
+    "discover",
+    "fetch",
+    "extract",
+    "audit",
+    "rank",
+    "publish"
+  ],
+  "model": {
+    "model": "deepseek-flash",
+    "requestId": "7a53705a-00dd-48a9-a830-adcc603f0b62",
+    "inputTokens": 7994,
+    "outputTokens": 1355
+  },
+  "rows": [
+    {
+      "id": "qoder",
+      "name": "Qoder 高校创造力大赛",
+      "tags": [
+        "智能体",
+        "AI 应用"
+      ],
+      "url": "https://tianchi.aliyun.com/competition/entrance/532536/introduction",
+      "evidenceUrl": "https://tianchi.aliyun.com/v3/proxy/competition/api/race/getDetail?raceId=532536",
+      "checkedAt": "2026-11-20T16:36:59.501Z",
+      "sha256": "9c2497e047bbb9a2536ecf6ea69050a21acb6d851bbc47dbb94fbabf86f503d4",
+      "events": [
+        {
+          "kind": "start",
+          "at": "2026-10-28T16:00:00.000Z",
+          "proof": "startTime 2026-10-29 00:00:00",
+          "zone": "北京时间"
+        },
+        {
+          "kind": "registration",
+          "at": "2026-11-30T10:00:00.000Z",
+          "proof": "报名截止 2026-11-30 18:00:00",
+          "zone": "北京时间"
+        },
+        {
+          "kind": "submission",
+          "at": "2026-11-30T10:00:00.000Z",
+          "proof": "提交结果截止 2026-11-30 18:00:00",
+          "zone": "北京时间"
+        }
+      ],
+      "status": "可报名",
+      "reason": "报名截止尚未到达，请按资格条款核实每位成员。",
+      "eligibility": {
+        "summary": "全国在校大学生（含本专科生、硕博研究生及港澳台学生），不限专业；1–3人组队；参赛成员须在初赛截止前完成天池平台实名认证和阿里云大学生认证。",
+        "quote": "全国在校大学生，含本/专科生与硕博研究生（含港澳台），不限专业"
+      },
+      "deliverable": {
+        "summary": "用 Qoder 完成开发与部署的项目，部署到 Qoder Sites 并开放公开访问，另在天池赛题页论坛发布作品帖并附公网链接。",
+        "quote": "用 Qoder 开发一个完整的项目，部署到 Qoder Sites 并开放公开访问"
+      },
+      "idea": "围绕实验室文献整理与实验数据场景做一个可公开访问的科研 Copilot，并完整记录 Qoder 开发部署过程。",
+      "issue": null
+    },
+    {
+      "id": "gameoff",
+      "name": "GitHub Game Off",
+      "tags": [
+        "游戏开发"
+      ],
+      "url": "https://github.blog/open-source/gaming/game-off-2026-the-theme-is-shift/",
+      "evidenceUrl": "https://github.blog/open-source/gaming/game-off-2026-the-theme-is-shift/",
+      "checkedAt": "2026-11-20T16:36:59.693Z",
+      "sha256": "095e096f1298b5d2f1249476592bb4f475ab68690862199a3f2ffeb9c85a355c",
+      "events": [
+        {
+          "kind": "submission",
+          "at": "2026-12-01T21:37:00.000Z",
+          "proof": "You have until December 1, 2026, at 13:37 PST",
+          "zone": "PST"
+        }
+      ],
+      "status": "开放投稿",
+      "reason": "主办方给出了当前作品征集的截止时间，请按规则核对个人资格。",
+      "eligibility": {
+        "summary": "个人或组队参加均可，允许使用任意语言、引擎、框架与工具，允许 AI 辅助开发但提交时需说明使用情况。",
+        "quote": "Work alone or form a team. Use whichever programming languages, game engines, frameworks, libraries, and tools make sense for your game."
+      },
+      "deliverable": {
+        "summary": "以 SHIFT 为灵感的游戏：源码放在公开 GitHub 仓库，并在 itch.io 提交参赛，项目应在活动期内开始、主要工作于提交期内完成。",
+        "quote": "Create a public repository. Store your game’s source code on GitHub."
+      },
+      "idea": "做一个以“切换视角”为核心机制的浏览器 2D 小游戏，先完成单一机制与一个可玩关卡。",
+      "issue": null
+    },
+    {
+      "id": "relate",
+      "name": "Neo4j Relate Challenge",
+      "tags": [
+        "AI 应用",
+        "智能体"
+      ],
+      "url": "https://relate.devpost.com/rules",
+      "evidenceUrl": "https://relate.devpost.com/rules",
+      "checkedAt": "2026-11-20T16:37:00.846Z",
+      "sha256": "f28482d91100e446bfcfeb757538060cfa363d6be40e242e620cdf2c0e4778a2",
+      "events": [
+        {
+          "kind": "start",
+          "at": "2026-11-12T02:00:00.000Z",
+          "proof": "Contest runs from 6:00 PM PST on Wednesday, November 11, 2026 to 6:00 PM PST on Friday, December 11, 2026",
+          "zone": "PST"
+        },
+        {
+          "kind": "submission",
+          "at": "2026-12-12T02:00:00.000Z",
+          "proof": "Contest runs from 6:00 PM PST on Wednesday, November 11, 2026 to 6:00 PM PST on Friday, December 11, 2026",
+          "zone": "PST"
+        }
+      ],
+      "status": "开放投稿",
+      "reason": "主办方给出了当前作品征集的截止时间，请按规则核对个人资格。",
+      "eligibility": {
+        "summary": "须年满18岁或所在居住地成年年龄且在赛事合法允许的地区；受美国禁运或全面制裁地区居民、受限方名单人员及参与赛事组织评审人员及其近亲属不得参赛；可个人或1–4人团队参加。",
+        "quote": "you must be at least 18 years old (or the age of majority where you live, if higher)"
+      },
+      "deliverable": {
+        "summary": "使用 Relate 新建的项目，公开 GitHub 仓库且打上 relate 标签，提供可让评委安装运行的说明，以及不超过2分钟的视频或可运行 demo 链接和截图。",
+        "quote": "The project must be posted as a public GitHub repository, tagged with the GitHub topic relate"
+      },
+      "idea": "基于 Relate 图数据库为 AI 智能体做一个可运行的知识关系检索原型，公开仓库并附安装说明与短演示。",
+      "issue": null
+    },
+    {
+      "id": "agentweb",
+      "name": "Open Agentic Web Challenge",
+      "tags": [
+        "智能体",
+        "AI 应用"
+      ],
+      "url": "https://cognizant-agenticweb.devpost.com/rules",
+      "evidenceUrl": "https://cognizant-agenticweb.devpost.com/rules",
+      "checkedAt": "2026-11-20T16:37:00.721Z",
+      "sha256": "859b315d39069f754e6b4cbd352d27d265efda4749a41842579e91d4b02ac64b",
+      "events": [
+        {
+          "kind": "start",
+          "at": "2026-11-12T04:00:00.000Z",
+          "proof": "Submission Period: Wednesday, November 11, 2026 (8:00 pm Pacific Time) – Monday, January 11, 2027 (8:00 am Pacific Time)",
+          "zone": "美国太平洋时间"
+        },
+        {
+          "kind": "submission",
+          "at": "2027-01-11T16:00:00.000Z",
+          "proof": "Submission Period: Wednesday, November 11, 2026 (8:00 pm Pacific Time) – Monday, January 11, 2027 (8:00 am Pacific Time)",
+          "zone": "美国太平洋时间"
+        }
+      ],
+      "status": "开放投稿",
+      "reason": "主办方给出了当前作品征集的截止时间，请按规则核对个人资格。",
+      "eligibility": {
+        "summary": "需达到所在居住地的成年年龄的个人或其组成的团队；受美国法律或全面制裁限制的国家、地区居民或机构不得参赛；评委及与评委同团队者不可参赛。",
+        "quote": "Individuals who are at least the age of majority where they reside as of the time of entry"
+      },
+      "deliverable": {
+        "summary": "可公开访问、能在当前浏览器稳定运行的项目，提交时提供网站、可运行 demo 或测试版本链接，以及上传至 YouTube 并公开的视频链接。",
+        "quote": "The Project must be publicly accessible, run consistently in a current web browser"
+      },
+      "idea": "开发一个可公开测试的开放代理发现与身份互认原型，附浏览器可运行 demo 和英文演示视频。",
+      "issue": null
+    },
+    {
+      "id": "agentware",
+      "name": "Agentware Hackathon",
+      "tags": [
+        "智能体"
+      ],
+      "url": "https://www.agentwarehack.com/",
+      "evidenceUrl": "https://www.agentwarehack.com/",
+      "checkedAt": "2026-11-20T16:36:59.360Z",
+      "sha256": "235c1956a72fc34fda6a9160278adcd8e48c564efd49e8b5c9e12893e40c5d00",
+      "events": [
+        {
+          "kind": "start",
+          "at": "2026-11-27T18:00:00.000Z",
+          "proof": "November 27, 2026 @ 18:00 UTC Kickoff",
+          "zone": "UTC"
+        },
+        {
+          "kind": "submission",
+          "at": "2026-11-30T18:00:00.000Z",
+          "proof": "November 30, 2026 @ 18:00 UTC Code freeze",
+          "zone": "UTC"
+        }
+      ],
+      "status": "即将开始",
+      "reason": "已公布开赛或作品征集开始时间。",
+      "eligibility": null,
+      "deliverable": {
+        "summary": "可自主完成真实工作的 AI 智能体，评委能运行、能观看其从触发到完成任务的演示视频、并能读懂其执行记录。",
+        "quote": "Build an AI agent that does real work on its own."
+      },
+      "idea": "为实验室做一个可无人值守运行的文献与截止日期跟踪智能体，演示从触发到完成任务的完整过程。",
+      "issue": null
+    },
+    {
+      "id": "4c",
+      "name": "中国大学生计算机设计大赛",
+      "tags": [
+        "AI 应用",
+        "游戏开发"
+      ],
+      "url": "https://jsjds.blcu.edu.cn/info/1041/2954.htm",
+      "evidenceUrl": "https://jsjds.blcu.edu.cn/info/1041/2954.htm",
+      "checkedAt": "2026-11-20T16:36:59.049Z",
+      "sha256": "3e0294792d5b1188b332788333a9e01bda128b0c25bf8b2fd22ffd722f6d0a2a",
+      "events": [],
+      "status": "待官宣",
+      "reason": "已找到本届主题，本次核对的公告未给出报名及交件日期。",
+      "eligibility": null,
+      "deliverable": {
+        "summary": "2027年（第20届）数字媒体类、计算机音乐创作类、信息可视化设计类作品，主题为中国农耕时间指南二十四节气，涵盖节气文明成就、领域先贤名人、古代著作与文化传播等方向。",
+        "quote": "数字媒体类、计算机音乐创作类、信息可视化设计类的竞赛主题为：中国农耕时间指南二十四节气"
+      },
+      "idea": "用信息可视化或数字媒体形式呈现二十四节气中的农事节律与相关农书民俗，突出节气文化传播。",
+      "issue": null
+    },
+    {
+      "id": "dubai",
+      "name": "Create AI Agents Championship",
+      "tags": [
+        "智能体",
+        "AI 应用"
+      ],
+      "url": "https://www.dubaichamberdigital.com/en/create-ai-agents",
+      "evidenceUrl": "https://www.dubaichamberdigital.com/en/create-ai-agents",
+      "checkedAt": "2026-11-20T16:37:02.291Z",
+      "sha256": "6286690f30e20d1f3fc0f6fb8774dd9f0d3416957b6badd64eb2d660cc7b7df9",
+      "events": [
+        {
+          "kind": "registration_month",
+          "at": "2027-01",
+          "proof": "Registrations close in January 2027",
+          "zone": "公告仅到月份"
+        },
+        {
+          "kind": "final_month",
+          "at": "2027-05",
+          "proof": "Grand Final in the first week of May 2027",
+          "zone": "公告仅到月份"
+        }
+      ],
+      "status": "待核实",
+      "reason": "主办方只公布了报名截止月份，可先查报名入口，暂不安排具体交件日。",
+      "eligibility": {
+        "summary": "面向全球学生、技术爱好者、创业者、创新者与应用专家，技术与非技术背景均可；无最低年龄限制，青年类别要求报名时领队未满21岁；可个人或团队参加，团队最多6人。",
+        "quote": "Open to anyone ready to solve a real problem with an AI Agent"
+      },
+      "deliverable": {
+        "summary": "处于创意、原型或早期 MVP 阶段且尚未完全商业化的 AI 智能体，提交 AI Agent 原型、路演材料和演示视频，材料须为英文。",
+        "quote": "The AI Agent submitted must be at the idea, prototype or early MVP stage and must not already be a fully commercialized solution"
+      },
+      "idea": "面向校园或社区真实问题做一个英文路演材料齐全的 AI 智能体早期原型，突出可量化社会影响。",
+      "issue": null
+    },
+    {
+      "id": "tencent",
+      "name": "腾讯游戏创作大赛 · 主赛区",
+      "tags": [
+        "游戏开发"
+      ],
+      "url": "https://gameinstitute.qq.com/awards2026/rule",
+      "evidenceUrl": "https://gameinstitute.qq.com/awards2026/rule",
+      "checkedAt": "2026-11-20T16:36:59.089Z",
+      "sha256": "93d536ba53568b4ca9106410f1768a4a8360495ca479b1f7c535959e63440367",
+      "events": [
+        {
+          "kind": "start",
+          "at": "2026-04-18T08:00:00.000Z",
+          "proof": "作品征集时间：自2026年4月18日16时00分至2026年9月15日23时59分止",
+          "zone": "北京时间"
+        },
+        {
+          "kind": "submission",
+          "at": "2026-09-15T15:59:00.000Z",
+          "proof": "作品征集时间：自2026年4月18日16时00分至2026年9月15日23时59分止",
+          "zone": "北京时间"
+        },
+        {
+          "kind": "award",
+          "at": "2026-11-27",
+          "proof": "颁奖典礼：2026年11月27日",
+          "zone": "北京时间"
+        }
+      ],
+      "status": "已截止",
+      "reason": "已经过作品征集截止时间。",
+      "eligibility": {
+        "summary": "面向在校高校生、毕业3年内学生及全球游戏行业开发者、工作室或开发团队；主创策划研发美术人员不超过12人；作品须为原创且未在2026年1月1日前商业化运营。",
+        "quote": "面向在校高校生、毕业3年内学生、全球游戏行业开发者、工作室或开发团队征集作品"
+      },
+      "deliverable": {
+        "summary": "具备一定完成度、能以 demo 展示核心玩法循环且玩法容量15分钟以上的原创游戏，报名时需提交试玩 demo 包体、宣传视频、宣传图片和介绍文案等评审材料。",
+        "quote": "所有参赛者在报名时需提供完整的评审材料，如试玩demo包体、宣传视频、宣传图片、介绍文案等"
+      },
+      "idea": "以玩法创新为核心做一款15分钟以上可试玩 demo 的小体量原创游戏，并配齐宣传视频与图片材料。",
+      "issue": null
+    }
+  ],
+  "engine": "@horsecoder/flow 1.0.3",
+  "trace": [
+    {
+      "id": "discover",
+      "title": "选择赛事入口",
+      "startedAt": "2026-11-20T16:36:58.933Z",
+      "detail": "在 8 个主办方入口中匹配 8 个。",
+      "elapsedMs": 0
+    },
+    {
+      "id": "fetch",
+      "title": "取主办方原文",
+      "startedAt": "2026-11-20T16:36:58.933Z",
+      "detail": "读到 8 份公告，0 个来源异常。",
+      "elapsedMs": 3358
+    },
+    {
+      "id": "extract",
+      "title": "提取参赛条件",
+      "startedAt": "2026-11-20T16:37:02.291Z",
+      "detail": "deepseek-flash 返回 8 条记录。",
+      "elapsedMs": 7381
+    },
+    {
+      "id": "audit",
+      "title": "核对证据与日期",
+      "startedAt": "2026-11-20T16:37:09.673Z",
+      "detail": "8 项交付物有原文摘录；另有 0 项摘录需复查。",
+      "elapsedMs": 0
+    },
+    {
+      "id": "rank",
+      "title": "排列优先级",
+      "startedAt": "2026-11-20T16:37:09.673Z",
+      "detail": "按可行动状态、同组最近截止日排序。",
+      "elapsedMs": 0
+    },
+    {
+      "id": "publish",
+      "title": "生成参赛清单",
+      "startedAt": "2026-11-20T16:37:09.673Z",
+      "detail": "输出 8 条带来源的赛事记录。",
+      "elapsedMs": 0
+    }
+  ],
+  "graph": {
+    "nodes": [
+      "start",
+      "discover",
+      "fetch",
+      "extract",
+      "audit",
+      "publish",
+      "end",
+      "rank"
+    ],
+    "routes": [
+      [
+        "start",
+        "discover"
+      ],
+      [
+        "discover",
+        "fetch"
+      ],
+      [
+        "extract",
+        "audit"
+      ],
+      [
+        "publish",
+        "end"
+      ],
+      [
+        "audit",
+        "rank"
+      ],
+      [
+        "rank",
+        "publish"
+      ],
+      [
+        "fetch",
+        "extract"
+      ]
+    ]
+  },
+  "finishedAt": "2026-11-20T16:37:09.673Z"
+}

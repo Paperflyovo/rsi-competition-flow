@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 2,
+  "id": "lab-competition",
+  "title": "赛事分流演示",
+  "elements": [
+    {
+      "id": "start",
+      "kind": "start",
+      "type": "stage",
+      "name": "开始",
+      "x": 30,
+      "y": 30,
+      "settings": {},
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "history",
+      "kind": "snapshot",
+      "type": "stage",
+      "name": "读取历史实跑",
+      "x": 257,
+      "y": 30,
+      "settings": {},
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "decision",
+      "kind": "branch",
+      "type": "stage",
+      "name": "是否开放投稿",
+      "x": 484,
+      "y": 30,
+      "settings": {
+        "field": "status",
+        "value": "开放投稿"
+      },
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "open",
+      "kind": "publish",
+      "type": "stage",
+      "name": "开放投稿",
+      "x": 711,
+      "y": 30,
+      "settings": {},
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "limit-others",
+      "kind": "limit",
+      "type": "stage",
+      "name": "截取前几项",
+      "x": 711,
+      "y": 175,
+      "settings": {
+        "count": 2
+      },
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "others",
+      "kind": "publish",
+      "type": "stage",
+      "name": "其他赛事",
+      "x": 938,
+      "y": 175,
+      "settings": {},
+      "locked": false,
+      "select": false
+    },
+    {
+      "id": "end",
+      "kind": "end",
+      "type": "stage",
+      "name": "结束",
+      "x": 1165,
+      "y": 101,
+      "settings": {},
+      "locked": false,
+      "select": false
+    }
+  ],
+  "links": [
+    {
+      "id": "start.out.history.in",
+      "type": "route",
+      "fromElementId": "start",
+      "fromPort": "out",
+      "toElementId": "history",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "history.out.decision.in",
+      "type": "route",
+      "fromElementId": "history",
+      "fromPort": "out",
+      "toElementId": "decision",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "decision.yes.open.in",
+      "type": "route",
+      "fromElementId": "decision",
+      "fromPort": "yes",
+      "toElementId": "open",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "decision.no.limit-others.in",
+      "type": "route",
+      "fromElementId": "decision",
+      "fromPort": "no",
+      "toElementId": "limit-others",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "limit-others.out.others.in",
+      "type": "route",
+      "fromElementId": "limit-others",
+      "fromPort": "out",
+      "toElementId": "others",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "open.out.end.in",
+      "type": "route",
+      "fromElementId": "open",
+      "fromPort": "out",
+      "toElementId": "end",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    },
+    {
+      "id": "others.out.end.in",
+      "type": "route",
+      "fromElementId": "others",
+      "fromPort": "out",
+      "toElementId": "end",
+      "toPort": "in",
+      "name": "",
+      "points": []
+    }
+  ]
+}

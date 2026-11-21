@@ -1,0 +1,4 @@
+[submodule "vendor/rsi-flow-visual"]
+	path = vendor/rsi-flow-visual
+	url = https://github.com/ymxiong/rsi-flow-visual.git
+	branch = dev_main
